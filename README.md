@@ -1,149 +1,149 @@
-# Coopersmith Self-Esteem Test - Backend API
+# Test de Autoestima de Coopersmith - API Backend
 
 <p align="center">
-<img src="https://img.shields.io/badge/Laravel-12.0-red.svg" alt="Laravel Version">
-<img src="https://img.shields.io/badge/PHP-8.2%2B-blue.svg" alt="PHP Version">
-<img src="https://img.shields.io/badge/Database-MySQL-orange.svg" alt="Database">
-<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+<img src="https://img.shields.io/badge/Laravel-12.0-red.svg" alt="Versión Laravel">
+<img src="https://img.shields.io/badge/PHP-8.2%2B-blue.svg" alt="Versión PHP">
+<img src="https://img.shields.io/badge/Base%20de%20Datos-MySQL-orange.svg" alt="Base de Datos">
+<img src="https://img.shields.io/badge/Licencia-MIT-green.svg" alt="Licencia">
 </p>
 
-## Overview
+## Descripción General
 
-This Laravel application provides the backend API for the **Coopersmith Self-Esteem Test** administration platform. It's designed to handle psychological assessments, client management, and test result analysis for mental health professionals and researchers.
+Esta aplicación Laravel proporciona la API backend para la plataforma de administración del **Test de Autoestima de Coopersmith**. Está diseñada para manejar evaluaciones psicológicas, gestión de clientes y análisis de resultados de pruebas para profesionales de la salud mental e investigadores.
 
-The Coopersmith Self-Esteem Inventory is a widely used psychological assessment tool that measures self-esteem levels across different areas of a person's life.
+El Inventario de Autoestima de Coopersmith es una herramienta de evaluación psicológica ampliamente utilizada que mide los niveles de autoestima en diferentes áreas de la vida de una persona.
 
-## Key Features
+## Características Principales
 
-- **Form Management System**: Dynamic form creation and management for psychological assessments
-- **Client Management**: Complete client profile management with demographic data
-- **Test Administration**: Secure test taking environment with answer tracking
-- **Multi-Section Forms**: Support for complex psychological assessments with multiple sections
-- **Question Types**: Various question formats including multiple choice with scoring
-- **User Authentication**: Secure API access using Laravel Sanctum
-- **Professional API**: RESTful API built with Laravel Orion for advanced querying and filtering
-- **Data Integrity**: Comprehensive validation and data protection measures
+- **Sistema de Gestión de Formularios**: Creación y gestión dinámica de formularios para evaluaciones psicológicas
+- **Gestión de Clientes**: Gestión completa de perfiles de clientes con datos demográficos
+- **Administración de Pruebas**: Entorno seguro para realizar pruebas con seguimiento de respuestas
+- **Formularios Multi-sección**: Soporte para evaluaciones psicológicas complejas con múltiples secciones
+- **Tipos de Preguntas**: Varios formatos de preguntas incluyendo opción múltiple con puntuación
+- **Autenticación de Usuarios**: Acceso seguro a la API usando Laravel Sanctum
+- **API Profesional**: API RESTful construida con Laravel Orion para consultas y filtrado avanzados
+- **Integridad de Datos**: Medidas exhaustivas de validación y protección de datos
 
-## Technical Stack
+## Stack Tecnológico
 
 - **Framework**: Laravel 12.0
-- **PHP Version**: 8.2+
-- **API Layer**: Laravel Orion (Advanced REST API with filtering, searching, and includes)
-- **Authentication**: Laravel Sanctum (API Token Authentication)
-- **Database**: MySQL with Eloquent ORM
-- **Frontend Assets**: Vite + TailwindCSS
-- **Testing**: PHPUnit with Feature and Unit tests
+- **Versión PHP**: 8.2+
+- **Capa API**: Laravel Orion (API REST avanzada con filtrado, búsqueda e inclusiones)
+- **Autenticación**: Laravel Sanctum (Autenticación con Token API)
+- **Base de Datos**: MySQL con Eloquent ORM
+- **Assets Frontend**: Vite + TailwindCSS
+- **Testing**: PHPUnit con pruebas Feature y Unit
 
-## Database Schema
+## Esquema de Base de Datos
 
-### Core Models
+### Modelos Principales
 
-- **Forms**: Main form structure with metadata
-- **FormSections**: Logical grouping of related questions
-- **Questions**: Individual assessment questions
-- **QuestionOptions**: Available responses with scoring values
-- **Clients**: Test participant profiles and demographics
-- **Answers**: Client responses and scoring data
-- **Users**: System administrators and professionals
+- **Forms**: Estructura principal del formulario con metadatos
+- **FormSections**: Agrupación lógica de preguntas relacionadas
+- **Questions**: Preguntas individuales de evaluación
+- **QuestionOptions**: Respuestas disponibles con valores de puntuación
+- **Clients**: Perfiles de participantes y datos demográficos
+- **Answers**: Respuestas de clientes y datos de puntuación
+- **Users**: Administradores del sistema y profesionales
 
-### Relationships
+### Relaciones
 
-- Forms have multiple FormSections
-- FormSections contain multiple Questions
-- Questions have multiple QuestionOptions
-- Clients provide multiple Answers
-- Answers reference QuestionOptions
+- Los Forms tienen múltiples FormSections
+- Los FormSections contienen múltiples Questions
+- Las Questions tienen múltiples QuestionOptions
+- Los Clients proporcionan múltiples Answers
+- Las Answers referencian QuestionOptions
 
-## API Endpoints
+## Endpoints de la API
 
-### Public Endpoints (No Authentication Required)
-
-```
-GET    /api/category-forms           # List form categories
-GET    /api/category-forms/{id}      # Get specific form category
-GET    /api/forms                    # List available forms
-GET    /api/forms/{id}               # Get form details
-GET    /api/form-sections            # List form sections
-GET    /api/questions                # List questions
-GET    /api/question-options         # List question options
-POST   /api/clients                  # Register new client
-POST   /api/answers                  # Submit test answers
-```
-
-### Authenticated Endpoints (Require API Token)
+### Endpoints Públicos (Sin Autenticación Requerida)
 
 ```
-POST   /api/register                 # Register new user
-POST   /api/login                    # User authentication
-POST   /api/logout                   # User logout
-
-# Complete CRUD operations for all resources when authenticated
-GET|POST|PUT|DELETE /api/{resource}  # Full resource management
+GET    /api/category-forms           # Listar categorías de formularios
+GET    /api/category-forms/{id}      # Obtener categoría específica
+GET    /api/forms                    # Listar formularios disponibles
+GET    /api/forms/{id}               # Obtener detalles del formulario
+GET    /api/form-sections            # Listar secciones de formulario
+GET    /api/questions                # Listar preguntas
+GET    /api/question-options         # Listar opciones de preguntas
+POST   /api/clients                  # Registrar nuevo cliente
+POST   /api/answers                  # Enviar respuestas del test
 ```
 
-## Installation & Setup
+### Endpoints Autenticados (Requieren Token API)
 
-### Prerequisites
+```
+POST   /api/register                 # Registrar nuevo usuario
+POST   /api/login                    # Autenticación de usuario
+POST   /api/logout                   # Cerrar sesión
 
-- PHP 8.2 or higher
+# Operaciones CRUD completas para todos los recursos cuando está autenticado
+GET|POST|PUT|DELETE /api/{resource}  # Gestión completa de recursos
+```
+
+## Instalación y Configuración
+
+### Requisitos Previos
+
+- PHP 8.2 o superior
 - Composer
-- MySQL 5.7+ or 8.0+
-- Node.js & NPM (for asset compilation)
+- MySQL 5.7+ o 8.0+
+- Node.js y NPM (para compilación de assets)
 
-### Installation Steps
+### Pasos de Instalación
 
-1. **Clone the repository**
+1. **Clonar el repositorio**
    ```bash
-   git clone <repository-url>
+   git clone <url-repositorio>
    cd coopersmith-backend
    ```
 
-2. **Install dependencies**
+2. **Instalar dependencias**
    ```bash
    composer install
    npm install
    ```
 
-3. **Environment configuration**
+3. **Configuración del entorno**
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
 
-4. **Database setup**
+4. **Configurar base de datos**
    ```bash
-   # Configure your database in .env
+   # Configurar tu base de datos en .env
    php artisan migrate
    php artisan db:seed
    ```
 
-5. **Asset compilation**
+5. **Compilar assets**
    ```bash
    npm run build
-   # or for development
+   # o para desarrollo
    npm run dev
    ```
 
-6. **Start the server**
+6. **Iniciar el servidor**
    ```bash
    php artisan serve
    ```
 
-### Development Environment
+### Entorno de Desarrollo
 
-For concurrent development (server + frontend + queue):
+Para desarrollo concurrente (servidor + frontend + cola):
 ```bash
 composer run dev
 ```
 
-This runs:
-- Laravel development server (`php artisan serve`)
-- Queue worker (`php artisan queue:listen`)
-- Vite development server (`npm run dev`)
+Esto ejecuta:
+- Servidor de desarrollo Laravel (`php artisan serve`)
+- Worker de colas (`php artisan queue:listen`)
+- Servidor de desarrollo Vite (`npm run dev`)
 
-## API Usage Examples
+## Ejemplos de Uso de la API
 
-### Registering a Client
+### Registrar un Cliente
 ```bash
 curl -X POST http://localhost:8000/api/clients \
   -H "Content-Type: application/json" \
@@ -157,7 +157,7 @@ curl -X POST http://localhost:8000/api/clients \
   }'
 ```
 
-### Submitting Test Answers
+### Enviar Respuestas del Test
 ```bash
 curl -X POST http://localhost:8000/api/answers \
   -H "Content-Type: application/json" \
@@ -169,56 +169,56 @@ curl -X POST http://localhost:8000/api/answers \
   }'
 ```
 
-### Advanced Filtering with Orion
+### Filtrado Avanzado con Orion
 ```bash
-# Filter forms by category
+# Filtrar formularios por categoría
 GET /api/forms?filter[category_form_id]=1
 
-# Search questions by content
+# Buscar preguntas por contenido
 GET /api/questions?search=autoestima
 
-# Include related data
+# Incluir datos relacionados
 GET /api/forms?include=sections,sections.questions
 ```
 
 ## Testing
 
-Run the test suite:
+Ejecutar la suite de pruebas:
 ```bash
 composer test
-# or
+# o
 php artisan test
 ```
 
-Run specific test types:
+Ejecutar tipos específicos de pruebas:
 ```bash
-# Feature tests
+# Pruebas Feature
 php artisan test --testsuite=Feature
 
-# Unit tests
+# Pruebas Unit
 php artisan test --testsuite=Unit
 ```
 
-## Security Features
+## Características de Seguridad
 
-- **API Token Authentication**: Secure access control using Laravel Sanctum
-- **Request Validation**: Comprehensive input validation for all endpoints
-- **CORS Support**: Configured for frontend application integration
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **Data Sanitization**: Input sanitization and XSS protection
+- **Autenticación con Token API**: Control de acceso seguro usando Laravel Sanctum
+- **Validación de Requests**: Validación exhaustiva de entrada para todos los endpoints
+- **Soporte CORS**: Configurado para integración con aplicación frontend
+- **Límite de Velocidad**: Limitación de velocidad de API para prevenir abuso
+- **Sanitización de Datos**: Sanitización de entrada y protección XSS
 
-## Professional Use
+## Uso Profesional
 
-This system is designed for:
-- **Clinical Psychologists**: Professional assessment administration
-- **Researchers**: Data collection for psychological studies
-- **Educational Institutions**: Student counseling and assessment
-- **Healthcare Providers**: Mental health screening tools
+Este sistema está diseñado para:
+- **Psicólogos Clínicos**: Administración profesional de evaluaciones
+- **Investigadores**: Recolección de datos para estudios psicológicos
+- **Instituciones Educativas**: Consejería estudiantil y evaluación
+- **Proveedores de Atención Médica**: Herramientas de screening de salud mental
 
-## License
+## Licencia
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Este proyecto está licenciado bajo la Licencia MIT - consulte el archivo [LICENSE](LICENSE) para más detalles.
 
-## Support
+## Soporte
 
-For technical support or questions about the Coopersmith Self-Esteem Test implementation, please contact the development team.
+Para soporte técnico o preguntas sobre la implementación del Test de Autoestima de Coopersmith, por favor contacte al equipo de desarrollo.
