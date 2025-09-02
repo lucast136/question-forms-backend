@@ -1,61 +1,224 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Coopersmith Self-Esteem Test - Backend API
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img src="https://img.shields.io/badge/Laravel-12.0-red.svg" alt="Laravel Version">
+<img src="https://img.shields.io/badge/PHP-8.2%2B-blue.svg" alt="PHP Version">
+<img src="https://img.shields.io/badge/Database-MySQL-orange.svg" alt="Database">
+<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
 </p>
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This Laravel application provides the backend API for the **Coopersmith Self-Esteem Test** administration platform. It's designed to handle psychological assessments, client management, and test result analysis for mental health professionals and researchers.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The Coopersmith Self-Esteem Inventory is a widely used psychological assessment tool that measures self-esteem levels across different areas of a person's life.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Key Features
 
-## Learning Laravel
+- **Form Management System**: Dynamic form creation and management for psychological assessments
+- **Client Management**: Complete client profile management with demographic data
+- **Test Administration**: Secure test taking environment with answer tracking
+- **Multi-Section Forms**: Support for complex psychological assessments with multiple sections
+- **Question Types**: Various question formats including multiple choice with scoring
+- **User Authentication**: Secure API access using Laravel Sanctum
+- **Professional API**: RESTful API built with Laravel Orion for advanced querying and filtering
+- **Data Integrity**: Comprehensive validation and data protection measures
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technical Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Framework**: Laravel 12.0
+- **PHP Version**: 8.2+
+- **API Layer**: Laravel Orion (Advanced REST API with filtering, searching, and includes)
+- **Authentication**: Laravel Sanctum (API Token Authentication)
+- **Database**: MySQL with Eloquent ORM
+- **Frontend Assets**: Vite + TailwindCSS
+- **Testing**: PHPUnit with Feature and Unit tests
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Database Schema
 
-## Laravel Sponsors
+### Core Models
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Forms**: Main form structure with metadata
+- **FormSections**: Logical grouping of related questions
+- **Questions**: Individual assessment questions
+- **QuestionOptions**: Available responses with scoring values
+- **Clients**: Test participant profiles and demographics
+- **Answers**: Client responses and scoring data
+- **Users**: System administrators and professionals
 
-### Premium Partners
+### Relationships
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Forms have multiple FormSections
+- FormSections contain multiple Questions
+- Questions have multiple QuestionOptions
+- Clients provide multiple Answers
+- Answers reference QuestionOptions
 
-## Contributing
+## API Endpoints
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Public Endpoints (No Authentication Required)
 
-## Code of Conduct
+```
+GET    /api/category-forms           # List form categories
+GET    /api/category-forms/{id}      # Get specific form category
+GET    /api/forms                    # List available forms
+GET    /api/forms/{id}               # Get form details
+GET    /api/form-sections            # List form sections
+GET    /api/questions                # List questions
+GET    /api/question-options         # List question options
+POST   /api/clients                  # Register new client
+POST   /api/answers                  # Submit test answers
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Authenticated Endpoints (Require API Token)
 
-## Security Vulnerabilities
+```
+POST   /api/register                 # Register new user
+POST   /api/login                    # User authentication
+POST   /api/logout                   # User logout
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Complete CRUD operations for all resources when authenticated
+GET|POST|PUT|DELETE /api/{resource}  # Full resource management
+```
+
+## Installation & Setup
+
+### Prerequisites
+
+- PHP 8.2 or higher
+- Composer
+- MySQL 5.7+ or 8.0+
+- Node.js & NPM (for asset compilation)
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd coopersmith-backend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Environment configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Database setup**
+   ```bash
+   # Configure your database in .env
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+5. **Asset compilation**
+   ```bash
+   npm run build
+   # or for development
+   npm run dev
+   ```
+
+6. **Start the server**
+   ```bash
+   php artisan serve
+   ```
+
+### Development Environment
+
+For concurrent development (server + frontend + queue):
+```bash
+composer run dev
+```
+
+This runs:
+- Laravel development server (`php artisan serve`)
+- Queue worker (`php artisan queue:listen`)
+- Vite development server (`npm run dev`)
+
+## API Usage Examples
+
+### Registering a Client
+```bash
+curl -X POST http://localhost:8000/api/clients \
+  -H "Content-Type: application/json" \
+  -d '{
+    "apellidos": "García",
+    "nombres": "Ana María",
+    "email": "ana.garcia@email.com",
+    "genero": "femenino",
+    "edad": 25,
+    "provincia": "Buenos Aires"
+  }'
+```
+
+### Submitting Test Answers
+```bash
+curl -X POST http://localhost:8000/api/answers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question_option_id": 1,
+    "client_id": 1,
+    "automatic_scoring": 4,
+    "manual_scoring": null
+  }'
+```
+
+### Advanced Filtering with Orion
+```bash
+# Filter forms by category
+GET /api/forms?filter[category_form_id]=1
+
+# Search questions by content
+GET /api/questions?search=autoestima
+
+# Include related data
+GET /api/forms?include=sections,sections.questions
+```
+
+## Testing
+
+Run the test suite:
+```bash
+composer test
+# or
+php artisan test
+```
+
+Run specific test types:
+```bash
+# Feature tests
+php artisan test --testsuite=Feature
+
+# Unit tests
+php artisan test --testsuite=Unit
+```
+
+## Security Features
+
+- **API Token Authentication**: Secure access control using Laravel Sanctum
+- **Request Validation**: Comprehensive input validation for all endpoints
+- **CORS Support**: Configured for frontend application integration
+- **Rate Limiting**: API rate limiting to prevent abuse
+- **Data Sanitization**: Input sanitization and XSS protection
+
+## Professional Use
+
+This system is designed for:
+- **Clinical Psychologists**: Professional assessment administration
+- **Researchers**: Data collection for psychological studies
+- **Educational Institutions**: Student counseling and assessment
+- **Healthcare Providers**: Mental health screening tools
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For technical support or questions about the Coopersmith Self-Esteem Test implementation, please contact the development team.
