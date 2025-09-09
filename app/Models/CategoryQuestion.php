@@ -13,6 +13,8 @@ class CategoryQuestion extends Model
     protected $fillable = [
         'name',
         'description',
+        'is_total_categories',
+        'is_scored',
         'user_id'
     ];
 

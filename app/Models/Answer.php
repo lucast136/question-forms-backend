@@ -50,10 +50,10 @@ class Answer extends Model
     // /**
     //  * Relación con el cliente
     //  */
-    // public function client()
-    // {
-    //     return $this->belongsTo(Client::class);
-    // }
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     // /**
     //  * Relación con el usuario que crea la respuesta

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name',150);
             $table->string('description',255)->nullable();
+            $table->boolean('is_total_categories')->default(false);
+            $table->boolean('is_scored')->default(true);
             $table->bigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();

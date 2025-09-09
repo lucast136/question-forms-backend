@@ -11,6 +11,8 @@ class CategoryQuestionRequest extends Request
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'is_total_categories' => 'nullable|boolean',
+            'is_scored' => 'required|boolean',
             'user_id' => 'nullable|numeric'
         ];
     }
